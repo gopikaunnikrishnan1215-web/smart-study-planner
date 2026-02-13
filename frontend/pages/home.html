@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Planner - Home</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body id="home-page">
+    <header class="top-bar">
+      <h1 class="app-title small">Study Planner</h1>
+      <button id="logout-button" class="secondary-button">Logout</button>
+    </header>
+
+    <main class="home-main">
+      <section class="home-hero">
+        <div class="home-hero-text">
+          <h2>Welcome to your Study Planner</h2>
+          <p>
+            Organize your subjects, track your progress, and get a clear view of
+            what to study each day.
+          </p>
+          <button
+            class="primary-button"
+            onclick="window.location.href = '/dashboard';"
+          >
+            Go to Dashboard
+          </button>
+        </div>
+        <div class="home-hero-visual">
+          <img
+            src="/static/assets/home-overview.svg"
+            alt="Overview of upcoming study sessions"
+            class="hero-image"
+            loading="lazy"
+          />
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
+

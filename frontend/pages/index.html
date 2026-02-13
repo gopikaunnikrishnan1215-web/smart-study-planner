@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Planner - Login / Register</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body>
+    <div class="auth-page">
+      <div class="auth-layout">
+        <div class="auth-visual">
+          <img
+            src="/static/assets/study-hero.svg"
+            alt="Student planning a study schedule"
+            class="hero-image"
+            loading="lazy"
+          />
+          <p class="hero-tagline">
+            Turn your exam dates into a daily plan you can actually follow.
+          </p>
+        </div>
+        <div class="auth-card">
+          <h1 class="app-title">Study Planner</h1>
+          <div class="tab-toggle">
+            <button id="login-tab" class="tab-button active">Login</button>
+            <button id="register-tab" class="tab-button">Register</button>
+          </div>
+
+          <div id="auth-messages" class="message-area"></div>
+
+          <form id="login-form" class="auth-form">
+            <label>
+              Username
+              <input type="text" id="login-username" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="login-password" required />
+            </label>
+            <button type="submit" class="primary-button full-width">
+              Login
+            </button>
+          </form>
+
+          <form id="register-form" class="auth-form hidden">
+            <label>
+              Username
+              <input type="text" id="register-username" required />
+            </label>
+            <label>
+              Email
+              <input type="email" id="register-email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="register-password" required />
+            </label>
+            <label>
+              Confirm Password
+              <input type="password" id="register-confirm-password" required />
+            </label>
+            <button type="submit" class="primary-button full-width">
+              Create Account
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
+

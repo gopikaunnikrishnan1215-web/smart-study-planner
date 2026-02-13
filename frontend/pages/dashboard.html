@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Planner - Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <h1 class="app-title small">Study Planner Dashboard</h1>
+      <button id="logout-button" class="secondary-button">Logout</button>
+    </header>
+
+    <main id="dashboard-root" class="dashboard-grid">
+      <div id="reminder-card" class="reminder-card hidden"></div>
+      <section class="panel panel-wide">
+        <h2>Add Subject</h2>
+        <p class="helper-text">
+          Tip: Choose realistic total hours based on your syllabus. The app will calculate daily hours automatically.
+        </p>
+        <div id="subject-form-messages" class="message-area"></div>
+        <form id="subject-form" class="grid-2">
+          <label>
+            Subject name
+            <input type="text" id="subject-name" required />
+          </label>
+          <label>
+            Exam date
+            <input type="date" id="subject-exam-date" required />
+          </label>
+          <label>
+            Total hours needed
+            <input
+              type="number"
+              step="0.1"
+              min="0"
+              id="subject-total-hours"
+              required
+            />
+          </label>
+          <div class="topics-input">
+            <label>
+              Topic
+              <input type="text" id="new-topic-input" />
+            </label>
+            <button type="button" id="add-topic-btn" class="secondary-button">
+              Add Topic
+            </button>
+          </div>
+          <div class="topics-tags" id="topics-list"></div>
+          <div class="full-width">
+            <button type="submit" class="primary-button full-width">
+              Save Subject
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <h2 style="margin: 0;">Today's Schedule</h2>
+          <div class="schedule-toggle">
+            <button id="schedule-today-btn" class="schedule-tab active">Today</button>
+            <button id="schedule-week-btn" class="schedule-tab">Week</button>
+          </div>
+        </div>
+        <div id="overload-warning" class="overload-warning hidden" role="alert" aria-live="polite"></div>
+        <ul id="schedule-list" class="simple-list"></ul>
+        <div id="week-view-container" class="week-view-container hidden"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Statistics</h2>
+        <div id="motivation-message" class="motivation-message hidden"></div>
+        <div id="stats-cards" class="stats-grid"></div>
+        <div id="insights" class="insights"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Settings</h2>
+        <div id="settings-messages" class="message-area"></div>
+        <form id="settings-form" class="settings-form">
+          <label>
+            Daily maximum study hours
+            <input
+              type="number"
+              step="0.5"
+              min="1"
+              id="settings-max-hours"
+              required
+            />
+          </label>
+          <label class="settings-checkbox">
+            <input type="checkbox" id="settings-show-tour" />
+            <span>Show dashboard quick tour on new devices</span>
+          </label>
+          <button type="submit" class="primary-button">
+            Save Settings
+          </button>
+        </form>
+      </section>
+
+      <section class="panel panel-wide">
+        <h2>Subjects & Progress</h2>
+        <div id="subjects-container" class="subjects-grid"></div>
+      </section>
+
+      <section class="panel panel-wide">
+        <h2>Update Progress</h2>
+        <p class="helper-text">
+          Log hours studied today and check off topics you've completed. Topics stay checked across days.
+        </p>
+        <div id="progress-form-messages" class="message-area"></div>
+        <form id="progress-form" class="grid-3">
+          <label>
+            Subject
+            <select id="progress-subject-select"></select>
+          </label>
+          <label>
+            Hours studied today
+            <input
+              type="number"
+              step="0.1"
+              min="0"
+              id="progress-hours"
+              required
+            />
+          </label>
+          <div class="full-width">
+            <h3>Topics completed today</h3>
+            <div id="progress-topics-checkboxes" class="topics-checkboxes" role="group" aria-label="Topics completed today"></div>
+          </div>
+          <div class="full-width">
+            <button type="submit" class="primary-button full-width">
+              Save Progress
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <div class="chatbot-header">
+        <h3>Study Helper</h3>
+        <button id="chatbot-close-btn" class="chatbot-close-btn">✕</button>
+      </div>
+      <div id="chatbot-messages" class="chatbot-messages">
+        <div class="chatbot-message bot">
+          <div class="chatbot-message-content">
+            Hi! 👋 I'm your Study Helper. I can help clarify concepts, provide examples, and highlight exam-important points. Choose a question below or ask your own!
+          </div>
+        </div>
+        <div id="default-questions" class="chatbot-default-questions">
+          <button class="default-question-btn" data-question="Can you explain this concept in simple words?">
+            <span class="question-text">Can you explain this concept in simple words?</span>
+          </button>
+          <button class="default-question-btn" data-question="Can you give a clear example for better understanding?">
+            <span class="question-text">Can you give a clear example for better understanding?</span>
+          </button>
+          <button class="default-question-btn" data-question="What are the key exam-oriented points to remember?">
+            <span class="question-text">What are the key exam-oriented points to remember?</span>
+          </button>
+        </div>
+      </div>
+      <form id="chatbot-form" class="chatbot-form">
+        <input
+          type="text"
+          id="chatbot-input"
+          placeholder="Ask your doubts..."
+          autocomplete="off"
+        />
+        <button type="submit" class="chatbot-send-btn">Send</button>
+      </form>
+    </div>
+    <button id="chatbot-toggle-btn" class="chatbot-toggle-btn" title="Open Study Helper">
+      💬
+    </button>
+
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
+
